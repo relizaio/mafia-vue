@@ -37,7 +37,7 @@ jobs:
         run: |
           docker build -t $REGISTRY_URL/$IMAGE_NAMESPACE/$IMAGE_NAME:$RLZ_SHORT_VER -t $REGISTRY_URL/$IMAGE_NAMESPACE/$IMAGE_NAME:latest --build-arg VERSION=$RLZ_FULL_VER  \
             --build-arg CI_ENV=github$GITHUB_SHA --build-arg GIT_COMMIT=$GITHUB_SHA --build-arg GIT_BRANCH=$GITHUB_REF .
-          docker_sha_256=$(docker push $IMAGE_NAMESPACE/$IMAGE_NAME:$RLZ_SHORT_VER | grep sha256 | cut -f 3 -d ' ')
+          docker_sha_256=$(docker push $REGISTRY_URL/$IMAGE_NAMESPACE/$IMAGE_NAME:$RLZ_SHORT_VER | grep sha256 | cut -f 3 -d ' ')
           # push latest also
           docker push $REGISTRY_URL/$IMAGE_NAMESPACE/$IMAGE_NAME:latest
           # save sha256 to env var
